@@ -26,5 +26,12 @@ def extract_indeed_jobs(last_page):
         title = jobTitle.find("span").string
         if title == "new": 
             title = jobTitle.find_all("span")[1].string
-        print(title)
+        company = result.find("span", {"class": "companyName"})
+        company_anchor = company.find("a")
+        if company_anchor is not None:
+            company = company_anchor.string
+        else:
+            company = company.string
+        print(title, company)
+
     return jobs
